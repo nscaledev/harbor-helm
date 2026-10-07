@@ -615,7 +615,7 @@ tests:
           path: spec.template.spec.containers[0].volumeMounts
           content:
             name: token-service-private-key
-            mountPath: /etc/core/token
+            mountPath: /etc/core/token-key
             readOnly: true
       - notContains:
           path: spec.template.spec.containers[0].volumeMounts

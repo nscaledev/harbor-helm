@@ -173,7 +173,7 @@ spec:
           subPath: key
         # A directory mount, not subPath, so a rotated key is picked up live.
         - name: token-service-private-key
-          mountPath: /etc/core/token
+          mountPath: /etc/core/token-key
           readOnly: true
         {{- if .Values.expose.tls.enabled }}
         - name: ca-download
