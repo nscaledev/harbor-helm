@@ -378,6 +378,11 @@ app: "{{ template "harbor.name" . }}"
   {{- end -}}
 {{- end -}}
 
+{{/* directory where the token signing key is mounted; shared by core-dpl and core-cm */}}
+{{- define "harbor.core.tokenKeyDir" -}}
+  {{- printf "/etc/core/token-key" -}}
+{{- end -}}
+
 {{/* core component service port */}}
 {{- define "harbor.core.servicePort" -}}
   {{- if .Values.internalTLS.enabled -}}
