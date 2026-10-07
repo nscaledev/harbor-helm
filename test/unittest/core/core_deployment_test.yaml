@@ -607,3 +607,28 @@ tests:
       - equal:
           path: spec.template.spec.priorityClassName
           value: test-priority
+
+  - it: TokenKeyMountedAsDirectory
+    template: templates/core/core-dpl.yaml
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: token-service-private-key
+            mountPath: /etc/core/token
+            readOnly: true
+      - notContains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content:
+            name: token-service-private-key
+            mountPath: /etc/core/private_key.pem
+            subPath: tls.key
+      - contains:
+          path: spec.template.spec.volumes
+          content:
+            name: token-service-private-key
+            secret:
+              secretName: RELEASE-NAME-harbor-core
+              items:
+                - key: tls.key
+                  path: tls.key

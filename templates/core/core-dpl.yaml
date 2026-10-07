@@ -171,9 +171,10 @@ spec:
         - name: secret-key
           mountPath: /etc/core/key
           subPath: key
+        # A directory mount, not subPath, so a rotated key is picked up live.
         - name: token-service-private-key
-          mountPath: /etc/core/private_key.pem
-          subPath: tls.key
+          mountPath: /etc/core/token
+          readOnly: true
         {{- if .Values.expose.tls.enabled }}
         - name: ca-download
           mountPath: /etc/core/ca
@@ -220,6 +221,9 @@ spec:
           {{- else }}
           secretName: {{ template "harbor.core" . }}
           {{- end }}
+          items:
+            - key: tls.key
+              path: tls.key
       {{- if .Values.expose.tls.enabled }}
       - name: ca-download
         secret:

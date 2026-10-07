@@ -193,3 +193,10 @@ tests:
       - equal:
           path: data.QUOTA_UPDATE_PROVIDER
           value: "3"
+
+  - it: TokenPrivateKeyPath
+    template: templates/core/core-cm.yaml
+    asserts:
+      - equal:
+          path: data.TOKEN_PRIVATE_KEY_PATH
+          value: /etc/core/token/tls.key
