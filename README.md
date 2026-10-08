@@ -1,5 +1,9 @@
 # Helm Chart for Harbor
 
+## Nscale fork
+
+This is a mirror of [goharbor/harbor-helm](https://github.com/goharbor/harbor-helm). It exists only so the S3 driver can set `forcepathstyle` (e54f234), which the Chainguard registry image needs because it ships a newer distribution/distribution than upstream Harbor supports. We strongly prefer not to change the chart here. Configure Harbor from values in [k8s-deploy-infra](https://github.com/nscaledev/k8s-deploy-infra) instead, and send any template change upstream first. To update, merge `goharbor:main` and tag.
+
 **Notes:** The master branch is in heavy development, please use the other stable versions instead. A highly available solution for Harbor based on chart can be found [here](docs/High%20Availability.md). And refer to the [guide](docs/Upgrade.md) to upgrade the existing deployment.
 
 This repository, including the issues, focuses on deploying Harbor chart via helm. For functionality issues or Harbor questions, please open issues on [goharbor/harbor](https://github.com/goharbor/harbor)
